@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
+const path = require('path');
+const routes = require('./routes');
 
 var locals = {
   title: 'An Example',
@@ -17,13 +19,12 @@ nunjucks.render('index.html', locals, function(err, output) {
 
 app.use(morgan('tiny'));
 
-app.use('/special', (req, res, next) => {
-  console.log('Entraste a un area especial');
-  next();
-});
+app.use(express.static(path.join(__dirname, '/public')));
 
-app.get('/', (req, res) => {
-  res.render('index', { title: locals.title, people: locals.people });
+app.use('/', routes);
+
+app.use('/', function(req, res, next) {
+  next();
 });
 
 app.listen(3001, () => {
