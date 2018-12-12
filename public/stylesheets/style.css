@@ -64,8 +64,17 @@ ul {
 }
 li {
   color: cornflowerblue;
+  list-style: none;
 }
 
 .form1 {
   margin-bottom: 60px;
+}
+
+/* img {
+  height: 60px;
+  width: 60px;
+} */
+div#fotoTweet {
+  float: left;
 }
